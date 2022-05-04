@@ -1,4 +1,7 @@
-Storage of board space
+/*Tic Tac Toe
+
+
+Storage of board spot
 Empty = 'empty'
 X = 'x'
 O = 'o'
@@ -26,15 +29,92 @@ var game = {
 }
 
 
-
 function start () {
     vLine(130, 0, 130, 800);
     vLine(270, 0, 270, 800);
     hLine(0, getWidth() / 2.7, 400, getWidth() / 2.7);
     hLine(0, getWidth() / 1.3, 400, getWidth() / 1.3);
-    play()
-    
+    play();
 }
+
+function reset(winner) {
+    for (var i = 1; i <= 9; i++) {
+        board['spot' + i] = 'empty';
+        console.log('clered')
+    }
+    removeAll();
+    if (game.lastwinner == 'O') {
+        game.turn = 0
+    } else {
+        game.turn = 1
+        
+    }
+    console.log(board)
+    start();
+}
+
+function winCheck() {
+    let winner = 'midGame'
+    console.log(board);
+    if (board.spot1 == 'X' && board.spot2 == 'X' && board.spot3 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot4 == 'X' && board.spot5 == 'X' && board.spot6 == 'X')  {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot7 == 'X' && board.spot8 == 'X' && board.spot9 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot1 == 'O' && board.spot2 == 'O' && board.spot3 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot4 == 'O' && board.spot5 == 'O' && board.spot6 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot7 == 'O' && board.spot8 == 'O' && board.spot9 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot1 == 'X' && board.spot4 == 'X' && board.spot7 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot2 == 'X' && board.spot5 == 'X' && board.spot8 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot3 == 'X' && board.spot6 == 'X' && board.spot9 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot1 == 'O' && board.spot4 == 'O' && board.spot7 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot2 == 'O' && board.spot5 == 'O' && board.spot8 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot3 == 'O' && board.spot6 == 'O' && board.spot9 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot1 == 'X' && board.spot5 == 'X' && board.spot9 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot3 == 'X' && board.spot5 == 'X' && board.spot7 == 'X') {
+        winner = 'X';
+        game.p1score += 1
+    } else if (board.spot1 == 'O' && board.spot5 == 'O' && board.spot9 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot3 == 'O' && board.spot5 == 'O' && board.spot7 == 'O') {
+        winner = 'O';
+        game.p2score += 1
+    } else if (board.spot1 != 'empty' && board.spot2 != 'empty' && board.spot3 != 'empty' && board.spot4 != 'empty' && board.spot5 != 'empty' && board.spot6 != 'empty' && board.spot7 != 'empty' && board.spot8 != 'empty' && board.spot9 != 'empty') {
+        alert('its a draw');
+        reset('draw')
+    }
+    
+    if (winner != 'midGame' && winner != 'draw') {
+        alert(`${winner} wins!`)
+        reset(winner)
+    }
+}
+
 
 function play() {
     mouseClickMethod(clickMethod);
@@ -49,11 +129,11 @@ function clickMethod(e) {
         if (board['spot' + pos] == 'X' || board['spot' + pos] == 'O') {
             
         } else {
-            drawO(pos)
-            game.turn = 1
-            board['spot' + pos] = 'O'
-            console.log(board['spot' + pos])
-            winCheck()
+            drawO(pos);
+            game.turn = 1;
+            board['spot' + pos] = 'O';
+            console.log(board['spot' + pos]);
+            winCheck();
         }
         
         
@@ -61,20 +141,16 @@ function clickMethod(e) {
         if (board['spot' + pos] == 'X' || board['spot' + pos] == 'O') {
             
         } else {
-            drawX(pos)
-            game.turn = 0
-            board['spot' + pos] = 'O'
-            console.log(board['spot' + pos])    
-            winCheck()
+            drawX(pos);
+            game.turn = 0;
+            board['spot' + pos] = 'X';
+            console.log(board['spot' + pos]);
+            winCheck();
         }
-        
     }
-    
 }
 
-function winCheck() {
-    if (board)
-}
+
 function getpos(e) {
     console.log(`${e.getX()} X and ${e.getY()} y`);
     
@@ -127,9 +203,7 @@ function getpos(e) {
         return pos;
     }
     
-    
 }
-
 
 
 function vLine(x1, y1, x2, y2) {
@@ -139,13 +213,13 @@ function vLine(x1, y1, x2, y2) {
     add(vLine);
 }
 
-
 function hLine(x1, y1, x2, y2) {
     var hLine = new Line(x1, y1, x2, y2);
     hLine.setLineWidth(4);
-     hLine.setColor(Color.black);
+    hLine.setColor(Color.black);
     add(hLine);
 }
+
 
 function drawO (pos) {
     var oText = new Text('O', "80pt Arial");
@@ -169,7 +243,7 @@ function drawO (pos) {
         oText.setPosition(getWidth() * 5/6 - oText.getWidth() / 2, getHeight() * 1 - oText.getHeight() / 2);
     }
     add(oText);
-}
+};
 
 function drawX (pos) {
     var xText = new Text('X', "80pt Arial");
@@ -193,4 +267,4 @@ function drawX (pos) {
         xText.setPosition(getWidth() * 5/6 - xText.getWidth() / 2, getHeight() * 1 - xText.getHeight() / 2);
     }
     add(xText);
-}
+};
